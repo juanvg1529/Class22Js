@@ -58,7 +58,45 @@ producto.disponible()
 
 // 3. Modifica la propiedad "cantidad" a 0
 producto.cantidad = 0;
-producto.disponible();
+
 // 4. Vuelve a invocar la función "disponible"
+producto.disponible();
 // El resultado debe ser un mensaje que indique que el producto
 // no esta disponible
+
+//Java script  guide objects
+var myCar = {
+    make: 'Ford',
+    model: 'Mustang',
+    year: 1969
+};
+
+var myObj = new Object(),
+    str = 'myString',
+    rand = Math.random(),
+    obj = new Object();
+myObj.type = 'Sintaxis de puntos';
+myObj['fecha de creación'] = 'Cadena con espacios';
+myObj[str] = 'Valor de cadena';
+myObj[rand] = 'Número aleatorio';
+myObj[obj] = 'Object';
+myObj[''] = 'Incluso una cadena vacía';
+
+console.log(myObj);
+var propertyName = 'make';
+console.log(myCar[propertyName]);
+
+//iterar sobre los objetos con con ciclos y condicionales
+function showProps(obj, objNames) {
+    let result = ``;
+    for (let i in obj) {
+        //obj.hasOwnProperty() fltra las propiades de la cadenas de prototipos del objeto
+        if (obj.hasOwnProperty(i)) {
+            result += `${objNames}.${i} = ${obj[i]} \n`;
+        }
+    }
+    return result;
+}
+
+console.log(showProps(myCar, 'myCar'));
+//showProps(myCar, 'myCar');

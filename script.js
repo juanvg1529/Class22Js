@@ -9,7 +9,7 @@ let persona = {
 
     },
     saludar: function() {
-        console.log('Hello world, my name is' + this.nombre);
+        console.log('Hello world, my name is ' + this.nombre);
     }
 };
 console.log(persona.saludar());
@@ -90,7 +90,7 @@ console.log(myCar[propertyName]);
 function showProps(obj, objNames) {
     let result = ``;
     for (let i in obj) {
-        //obj.hasOwnProperty() fltra las propiades de la cadenas de prototipos del objeto
+        //obj.hasOwnProperty() fltra las propieades de la cadenas de prototipos del objeto
         if (obj.hasOwnProperty(i)) {
             result += `${objNames}.${i} = ${obj[i]} \n`;
         }
@@ -100,3 +100,79 @@ function showProps(obj, objNames) {
 
 console.log(showProps(myCar, 'myCar'));
 //showProps(myCar, 'myCar');
+
+//enumerar propiedades de un objeto
+function listAllPropierties(o) {
+    let objectInspect;
+    let resul = [];
+    for (objectInspect = o; objectInspect != null; objectInspect = Object.getPrototypeOf(objectInspect)) {
+        objectInspect = resul.concat(Object.getOwnPropertyNames(objectInspect));
+    }
+    return resul;
+}
+//iniciador de objeto
+// var obj = {
+//     property_1: value_1, // property_# puede ser un identificador...
+//     2: value_2, // o un número...
+//     // ...,
+//     'property n': value_n
+// }; // o una cadena
+if (1 < 2) var x = { greeting: '¡Hola!' };
+
+function Car(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+}
+var mycar = new Car('Eagle', 'Talon TSi', 1993);
+var kenscar = new Car('Nissan', '300ZX', 1992);
+var vpgscar = new Car('Mazda', 'Miata', 1990);
+console.log(kenscar);
+//Un objeto puede tener una propiedad que en sí misma es otro objeto. 
+//Por ejemplo, supongamos que defines un objeto llamado person de la siguiente manera:
+
+function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+}
+var rand = new Person('Rand McKinnon', 33, 'M');
+var ken = new Person('Ken Jones', 39, 'M');
+console.log(rand);
+
+//nuevas instancias de los nuevos objetos
+function Car(make, model, year, owner) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.owner = owner;
+}
+
+var car1 = new Car('Eagle', 'Talon TSi', 1993, rand);
+var car2 = new Car('Nissan', '300ZX', 1992, ken); //aqui llamo al objeto anterior de las personas para 
+//el nombre del propietario
+console.log(car2.owner.name);
+console.log(car2);
+console.log(car1.make);
+
+//add propiertie to the object
+car1.color = 'black';
+console.log(car1);
+
+//object.create method
+// Propiedades y método de encapsulación para Animal
+var Animal = {
+    type: 'Invertebrates', // Valor predeterminado de las propiedades
+    displayType: function() { // Método que mostrará el tipo de Animal
+        console.log(this.type);
+    }
+};
+
+// Crea un nuevo tipo de animal llamado animal1
+var animal1 = Object.create(Animal);
+animal1.displayType(); // Muestra: Invertebrates
+
+// Crea un nuevo tipo de animal llamado Fishes
+var fish = Object.create(Animal);
+fish.type = 'Fishes';
+fish.displayType(); // Muestra: Fishes
